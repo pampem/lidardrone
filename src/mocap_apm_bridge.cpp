@@ -5,6 +5,7 @@
 using std::placeholders::_1;
 using namespace std::chrono_literals;
 
+//mocapとの連携用
 class Bridge : public rclcpp::Node
 {
 public:
@@ -16,12 +17,14 @@ public:
         qos.durability(RMW_QOS_POLICY_DURABILITY_VOLATILE);
 
         // QoSを使用してパブリッシャーを作成
-        publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("mavros/mocap/pose", qos);
-        publisher_2 = this->create_publisher<geometry_msgs::msg::PoseStamped>("mavros/vision_pose/pose", qos);
+        publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("drone1/mavros/mocap/pose", qos);
+        publisher_2 = this->create_publisher<geometry_msgs::msg::PoseStamped>("drone1/mavros/vision_pose/pose", qos);
 
         // QoSを使用してサブスクリプションを作成
         subscription_ = this->create_subscription<mocap_msgs::msg::RigidBodies>(
             "/rigid_bodies", qos, std::bind(&Bridge::listener_callback, this, _1));
+
+        std::cout << "Bridge is running\n" << std::endl;
     }
 
 private:
