@@ -54,7 +54,7 @@ ament_target_dependencies(mocap_apm_bridge
  mavros_msgs
 )
 
-ament_target_dependencies(glim_apm_mocap_bridge
+ament_target_dependencies(glim_mocap_apm_bridge
  rclcpp
  geometry_msgs
  mocap_msgs
