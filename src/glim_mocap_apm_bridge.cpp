@@ -42,15 +42,15 @@ private:
       pose_stamped->header.frame_id = "map";  // 適切なフレームIDを設定
       pose_stamped->pose = msg->rigidbodies[0].pose;  // 最初のRigidBodyのポーズをコピー
 
-      publisher_->publish(*pose_stamped);
-      publisher_2->publish(*pose_stamped);
+      // publisher_->publish(*pose_stamped);
+      // publisher_2->publish(*pose_stamped);
       last_mocap_pose_ = pose_stamped;
     }
   }
 
   void timer_callback()
   {
-    if (this->now() - last_glim_pose_time_ > 0.5s) {
+    if (this->now() - last_glim_pose_time_ > 0.1s) {
       // If last Glim pose was received more than 0.5 seconds ago, publish last mocap pose
       if (last_mocap_pose_) {
         publisher_->publish(*last_mocap_pose_);

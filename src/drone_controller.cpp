@@ -10,7 +10,6 @@
 class DroneController : public rclcpp::Node {
 public:
   DroneController() : Node("drone_controller") {
-    // コントローラーの入力を購読
     joy_subscription = this->create_subscription<sensor_msgs::msg::Joy>(
         "joy", 10, std::bind(&DroneController::joy_callback, this, std::placeholders::_1));
 
@@ -47,7 +46,6 @@ public:
     velocity_msg.linear.z = right_stick_ud; // 高度移動
     velocity_msg.angular.z = right_stick_lr; // 回転
 
-    // 速度コマンドを公開
     velocity_publisher->publish(velocity_msg);
   }
 
@@ -97,12 +95,8 @@ public:
     land_request->longitude = 0; // 0を指定することで現在位置を使用
     land_request->min_pitch = 0; // 最小ピッチ角、通常は0でOK
     land_request->yaw = 0; // 着陸時のヨー角、通常は現在のヨー角を維持
-
-    // 着陸コマンドを非同期で送信
+    
     auto land_future = land_client->async_send_request(land_request);
-
-    // 着陸完了を待つためのロジックをここに追加するかもしれません。
-    // 例えば、地面に達するまでの高度を監視するなど。
 
     RCLCPP_INFO(this->get_logger(), "Drone landing initiated");
   }
