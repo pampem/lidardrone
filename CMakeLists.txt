@@ -29,6 +29,7 @@ add_executable(mocap_apm_bridge src/mocap_apm_bridge.cpp)
 add_executable(drone_controller src/drone_controller.cpp)
 add_executable(eval_glim src/eval_glim.cpp)
 add_executable(glim_mocap_apm_bridge src/glim_mocap_apm_bridge.cpp)
+add_executable(sethome src/sethome.cpp)
 
 # Specify libraries to link a library or executable target against
 ament_target_dependencies(occupancy_grid_mapper_node
@@ -77,6 +78,13 @@ ament_target_dependencies(eval_glim
  tf2
 )
 
+ament_target_dependencies(sethome
+ rclcpp
+ geometry_msgs
+ mocap_msgs
+ mavros_msgs
+)
+
 # Install executables and/or libraries
 install(TARGETS
   occupancy_grid_mapper_node
@@ -85,6 +93,7 @@ install(TARGETS
   drone_controller
   eval_glim
   mocap_apm_bridge
+  sethome
   DESTINATION lib/${PROJECT_NAME}/
 )
 

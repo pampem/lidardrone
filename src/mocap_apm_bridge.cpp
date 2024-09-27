@@ -17,8 +17,8 @@ public:
         qos.durability(RMW_QOS_POLICY_DURABILITY_VOLATILE);
 
         // QoSを使用してパブリッシャーを作成
-        publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("drone1/mavros/mocap/pose", qos);
-        publisher_2 = this->create_publisher<geometry_msgs::msg::PoseStamped>("drone1/mavros/vision_pose/pose", qos);
+        publisher_ = this->create_publisher<geometry_msgs::msg::PoseStamped>("mavros/mocap/pose", qos);
+        publisher_2 = this->create_publisher<geometry_msgs::msg::PoseStamped>("mavros/vision_pose/pose", qos);
 
         // QoSを使用してサブスクリプションを作成
         subscription_ = this->create_subscription<mocap_msgs::msg::RigidBodies>(

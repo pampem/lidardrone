@@ -13,6 +13,7 @@
       - vibration
       - vision_speed_estimate
       - wheel_odometry
+      - distance_sensor
 
     # plugin_allowlist:
     #   - 'sys_*'
